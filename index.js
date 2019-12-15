@@ -20,6 +20,8 @@ var cmds = {
 
 client.on('message', async msg => {
   try {
+    //return if other channel
+    if (msg.channel.id != config.channelid) return
     // Getting content, author and channel out of message object
     let cont = msg.content,
       author = msg.author
