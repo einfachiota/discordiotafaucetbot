@@ -2,6 +2,7 @@
 A discordbot which can pay out IOTA devnet tokens
 
 Create a `botconfig.json` file and replace the token, you get yours here in the bot section: https://discordapp.com/developers/applications/
+Define channelid in which the bot recognizes messages, all other channels are ignored
 ```
 {
   "token": "srhsjdSRAehhdjztkz.arJrshA.zW_L3jhf_ghtjt",
