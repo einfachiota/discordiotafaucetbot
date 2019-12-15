@@ -5,7 +5,8 @@ Create a `botconfig.json` file and replace the token, you get yours here in the 
 ```
 {
   "token": "srhsjdSRAehhdjztkz.arJrshA.zW_L3jhf_ghtjt",
-  "prefix": "!"
+  "prefix": "!",
+  "channelid": 693588712768700451
 }
 ```
 
