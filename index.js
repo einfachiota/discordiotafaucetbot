@@ -19,13 +19,13 @@ var cmds = {
 }
 
 client.on('message', async msg => {
-  try{
+  try {
     // Getting content, author and channel out of message object
     let cont = msg.content,
       author = msg.author
     //ignore bots
     if (author.bot) return;
-  
+
     if (cont.startsWith(config.prefix)) {
       let cmd = cont.split(' ')[0].substr(config.prefix.length),
         args = cont.split(' ').slice(1)
@@ -34,7 +34,7 @@ client.on('message', async msg => {
         cmds[cmd](msg, args)
       }
     }
-  } catch(err){
+  } catch (err) {
     console.log(err)
   }
 })
@@ -51,7 +51,7 @@ function send(msg, args) {
     address: args[0],
     value: args[1],
     message: args[2],
-    tag: 'FAUCETBOT'
+    tag: args[3] || 'FAUCETBOT'
   }
   paymentModule.payout.send(payoutObject)
     .then(payout => {
@@ -102,7 +102,7 @@ function help(msg) {
   let embed = new RichEmbed()
     .setTitle('Commands:')
     .setColor("#17b6d6")
-    .setDescription('help\nbalance\nsend <address amount message>\nExample: !send AEG...RHS 1 Hi\ndonate //send not needed iotas back\n');
+    .setDescription('help\nbalance\nsend <address amount message tag>\nExample: !send AEG...RHS 1 Hi\ndonate //send not needed iotas back\n');
   // Send the embed to the same channel as the message
   msg.channel.send(embed);
 }
