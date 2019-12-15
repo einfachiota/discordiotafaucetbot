@@ -4,7 +4,7 @@ const paymentModule = require('iota-payment')
 
 const client = new Client()
 const config = JSON.parse(fs.readFileSync('botconfig.json', 'utf8'))
-const maxPayoutAmount = 1000
+const maxPayoutAmount = config.maxPayoutAmount
 
 client.on('ready', () => {
   console.log(`Bot started as ${client.user.username}`)
