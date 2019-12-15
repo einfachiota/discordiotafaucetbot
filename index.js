@@ -104,7 +104,7 @@ function help(msg) {
   let embed = new RichEmbed()
     .setTitle('Commands:')
     .setColor("#17b6d6")
-    .setDescription('help\nbalance\nsend <address amount message tag>\nExample: !send AEG...RHS 1 Hi\ndonate //send not needed iotas back\n');
+    .setDescription('help\nbalance\nsend <address amount message tag>\nExample: !send AEG...RHS 1 Hi TRINITY\ndonate //send not needed iotas back\n');
   // Send the embed to the same channel as the message
   msg.channel.send(embed);
 }
