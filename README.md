@@ -7,7 +7,8 @@ Define channelid in which the bot recognizes messages, all other channels are ig
 {
   "token": "srhsjdSRAehhdjztkz.arJrshA.zW_L3jhf_ghtjt",
   "prefix": "!",
-  "channelid": 693588712768700451
+  "channelid": 693588712768700451,
+  "maxPayoutAmount": 1000
 }
 ```
 
