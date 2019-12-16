@@ -43,7 +43,6 @@ client.on('message', async msg => {
 
 client.login(config.token)
 
-let payouts = {}
 function send(msg, args) {
   if (args[1] > maxPayoutAmount) {
     msg.reply(`payout limit is ${maxPayoutAmount}`)
@@ -53,30 +52,25 @@ function send(msg, args) {
     address: args[0],
     value: args[1],
     message: args[2],
-    tag: args[3] || 'FAUCETBOT'
+    tag: args[3] || 'FAUCETBOT',
+    data: { discordid: msg.author.id, channel: msg.channel }
   }
   paymentModule.payout.send(payoutObject)
     .then(payout => {
-      payouts[payout.id] = { discordid: msg.author.id, channel: msg.channel }
       msg.reply("payout created, transaction will be sent soon").then(own_msg => own_msg.delete(10000))
     })
     .catch(err => {
       console.log(err);
-      if (typeof err.message != 'undefined') {
-        msg.reply(JSON.stringify(err.message))
-      } else {
-        msg.reply(JSON.stringify(err))
-      }
+      msg.reply(JSON.stringify(err))
     })
 }
 
 //Create an event handler which is called, when a payout was successfull
 let onPayoutSuccess = function (payout) {
-  let payoutInfo = payouts[payout.id]
   let embed = new RichEmbed()
     .setColor("#17b6d6")
     .setDescription(`Payout sent: [devnet.thetangle.org](https://devnet.thetangle.org/transaction/${payout.txhash})`);
-  payoutInfo.channel.send(`<@${payoutInfo.discordid}>`, embed);
+  payout.data.channel.send(`<@${payout.data.discordid}>`, embed);
 }
 paymentModule.on('payoutSent', onPayoutSuccess);
 
