@@ -53,7 +53,7 @@ function send(msg, args) {
     value: args[1],
     message: args[2],
     tag: args[3] || 'FAUCETBOT',
-    data: { discordid: msg.author.id, channel: msg.channel }
+    data: { discordid: msg.author.id, channelid: msg.channel.id }
   }
   paymentModule.payout.send(payoutObject)
     .then(payout => {
@@ -70,7 +70,7 @@ let onPayoutSuccess = function (payout) {
   let embed = new RichEmbed()
     .setColor("#17b6d6")
     .setDescription(`Payout sent: [devnet.thetangle.org](https://devnet.thetangle.org/transaction/${payout.txhash})`);
-  payout.data.channel.send(`<@${payout.data.discordid}>`, embed);
+  client.channels.get(payout.data.channelid).send(`<@${payout.data.discordid}>`, embed);
 }
 paymentModule.on('payoutSent', onPayoutSuccess);
 
